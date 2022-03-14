@@ -1,14 +1,14 @@
 ## gender-guesser==0.4.0
 matplotlib
 streamlit
-numpy==1.18.5
+# numpy==1.18.5
 pandas
 ## xmltodict
 
 ## urllib3 is a powerful, user-friendly HTTP client for Python
-urllib3
+# urllib3
 
-seaborn==0.11.0
+# seaborn==0.11.0
 
 ## Lottie is a library that parses Adobe After Effects animations ...
 ## streamlit-lottie
