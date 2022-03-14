@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 
 # This command install all the libs on the requirements.txt insede the container
 COPY requirements.txt ./
+RUN sudo -H pip3 install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8501
