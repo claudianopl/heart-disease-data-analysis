@@ -68,15 +68,13 @@ problemas reais, integrando suas soluções em projetos de sistemas de informaç
       │   ├── personal-key-indicators-of-heart-disease-dataset.csv
       │   └── personal-key-indicators-of-heart-disease-data-dictionary.md
       ├── pipeline                 # These could be docker containers related code, scripts, workflow related code, etc.
-      │   ├── airflow
-      │   │    ├── dags
-      │   │    |   ├── regretion_dag.py
-      │   │    │   ├── forecasting_dag.py
-      │   │    │   ├── validation_dag.py
-      │   │    │   └── clustering_dag.py
-      |   │    └── ...
-      │   ├── config
-      │   └── setup.sh
+      │   ├── dags
+      │   │    ├── ingestion_dag.py
+      │   │    ├── validation_dag.py
+      │   │    ├── regretion_dag.py
+      │   │    ├── forecasting_dag.py
+      │   │    └── clustering_dag.py
+      |   └── ...
       │
       ├── models             # The folder that consists of files representing trained/retrained models as part of build jobs, etc
       │   ├── project_build_id             # the result of the model
