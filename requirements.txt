@@ -1,6 +1,9 @@
 ## gender-guesser==0.4.0
 matplotlib
 streamlit
+plotly
+numpy
+streamlit-option-menu
 # numpy==1.18.5
 pandas
 ## xmltodict
