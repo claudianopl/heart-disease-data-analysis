@@ -15,6 +15,12 @@ def data_exploretion(ds):
 
   heatMap = px.density_heatmap(ds, x="AgeCategory", y="Sex", category_orders={"AgeCategory": ageOrder})
 
+  smoking_x_HeartDisease= px.histogram(dsOnlyHeartDiseaseYes, x="HeartDisease", color="Smoking", barmode="group", color_discrete_map = {'Yes':'red','No':'blue'})
+
+  drinking_x_HeartDisease= px.histogram(dsOnlyHeartDiseaseYes, x="HeartDisease", color="AlcoholDrinking", barmode="group", color_discrete_map = {'Yes':'red','No':'blue'})
+
+  physicalActivity_x_HeartDisease=px.histogram(dsOnlyHeartDiseaseYes, x="HeartDisease", color="PhysicalActivity", barmode="group", color_discrete_map = {'Yes':'blue','No':'red'})
+
   y = ds['AgeCategory'].value_counts()
   pieChart = px.pie(y, values=y, names=y.index )
   pieChart.update_traces(textposition='inside', textinfo='percent+label')
@@ -26,7 +32,7 @@ def data_exploretion(ds):
   row0_space1, row0_space2 = st.columns(2)
 
   with row0_space1:
-    st.markdown("#### Como está a dispersão de dados relacionados à idade no dataset ?")
+    st.markdown("#### Como está a dispersão de dados relacionados à idade no dataset?")
     st.plotly_chart(pieChart)
     st.markdown('Nota-se que a grande maioria das faixas etárias estão relativamente balanceadas, com uma maior predominância nas idades 70-74, 60-64 e 65-69.')
 
@@ -39,12 +45,12 @@ def data_exploretion(ds):
   row1_space1, row2_space2 = st.columns(2)
 
   with row1_space1:
-    st.markdown("""#### Os gêneros estão balanceados no dataset ?""")
+    st.markdown("""#### Os gêneros estão balanceados no dataset?""")
     st.plotly_chart(histogramSexCount)
     st.markdown("Nota-se que existem mais mulheres no dataset.")
 
   with row2_space2:
-    st.markdown("""#### Agora, apos filtrar o dataset para casos positivos, como esses casos se comportam em relação à idade e sexo do paciente? """)
+    st.markdown("""#### Agora, após filtrar o dataset para casos positivos, como esses casos se comportam em relação à idade e sexo do paciente? """)
     st.plotly_chart(histogramAgeCategory)
     st.markdown('De acordo com os gráfico é perceptível que os casos positivos começam a aumentar de forma mais notável a partir da faixa etária de 50-54 anos em ambos os sexos, é também visível que o sexo que mais possui casos é o masculino.')
 
@@ -55,3 +61,24 @@ def data_exploretion(ds):
     st.markdown(" - A idade mostrou ser um fator importante para o aumento dos casos positivos.")
     st.markdown(" - O sexo também tem um grau de relevância, tendendo aumentar o número de casos para homens.")
     st.markdown("##### Tais pontos são apoiados pelos primeiros três gráficos que mostram que não existe uma grande diferença no número de dados, tais como faixa etária e sexo, sem isso os pontos acima demonstrados poderiam estar incorretos.")
+
+  st.markdown('### Seção 02: Existe alguma relação entre hábitos e o desenvolvimento de problemas cardiovasculares?')
+
+  row3_space1, row3_space2 = st.columns(2)
+
+  with row3_space1:
+    st.markdown("#### O hábito de fumar gera algum impacto no desenvolvimento de problemas cardiovasculares?")
+    st.plotly_chart(smoking_x_HeartDisease)
+    st.markdown('O gráfico acima nos mostra que apesar da diferença não ser grande, ainda assim, os fumantes são a maioria entre os casos confirmados com problemas cardiovasculares.')
+
+  with row3_space2:
+    st.markdown("#### No gráfico abaixo veremos se o fato de consumir bebidas alcoólicas possui alguma relação com o desenvolvimento de doenças cardiovasculares.")
+    st.plotly_chart(drinking_x_HeartDisease)
+    st.markdown('Como podemos ver, o hábito de consumir bebidas alcoólicas não está diretamente ligado ao desenvolvimento de problemas cardiovasculares.')
+
+  row4_space1 = st.columns(1)
+
+  with row4_space1:
+    st.markdown("#### A falta de prática de atividade fisicas pode ter alguma influencia no desenvolvimento de doenças cardiovasculares?")
+    st.plotly_chart(physicalActivity_x_HeartDisease)
+    st.markdown('De acordo com o gráfico acima, a falta de prática de atividades físicas não está diretamente ligada ao desenvolvimento de doenças cardiovasculares.')
