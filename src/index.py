@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 from streamlit_option_menu import option_menu
 
-from dataExploretion.data_exploretion import data_exploretion
+from dataExploration.data_exploration import data_exploration
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
 
@@ -26,4 +26,4 @@ options = optionsDict[selected]
 if options == 'preProcessing':
   st.title('Pré-processamento dos dados')
 if options == 'exploratoryAnalysis':
-  data_exploretion(ds)
+  data_exploration()
