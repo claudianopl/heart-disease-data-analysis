@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 from streamlit_option_menu import option_menu
 
-from dataExploration.data_exploration import data_exploration
+from app.dataExploration.data_exploration import data_exploration
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
 
