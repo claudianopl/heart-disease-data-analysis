@@ -1,0 +1,9 @@
+---
+## default airflow configuration from Airflow base image.
+## this is only for learn stuff in the future 
+# IS NOT IN USE
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+airflow.username: airflow_system
+airflow.password: ${AIRFLOW_SYSTEM_PASSWORD}

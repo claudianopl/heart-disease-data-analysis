@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  streamlit:
+    build: setup/streamlit/Dockerfile
+    ports:
+      - "8501:8501"
+
+  airflow:
+    build: setup/airflow/Dockerfile
+    ports:
+      - ""
+
+
+volumes:
+  airflow_dbdata:
