@@ -103,7 +103,7 @@ def data_exploration():
 
   histogramSexCount = px.histogram(ds, x="Sex", color="Sex",  color_discrete_map = {'Male':'blue','Female':'red'}, category_orders={"AgeCategory": ageOrder})
 
-  histogramAgeCategory = px.histogram(dsOnlyHeartDiseaseYes, x="AgeCategory", color="Sex", barmode="group", color_discrete_map = {'Male':'blue','Female':'red'}, category_orders={"AgeCategory": ageOrder})
+  histogramAgeCategory = px.histogram(dsOnlyHeartDiseaseYes, x="AgeCategory",  color="Sex", barmode="group", color_discrete_map = {'Male':'blue','Female':'red'}, category_orders={"AgeCategory": ageOrder})
   df = px.data.tips()
 
   heatMap = px.density_heatmap(ds, x="AgeCategory", y="Sex", category_orders={"AgeCategory": ageOrder})
@@ -132,9 +132,9 @@ def data_exploration():
   row1_space1, row2_space2 = st.columns(2)
 
   with row1_space1:
-    st.markdown("""#### Os gêneros estão balanceados no dataset ?""")
+    st.markdown("""#### Existe alguma discrepância entre a quantidade de homens e mulheres no dataset ?""")
     st.plotly_chart(histogramSexCount)
-    st.markdown("Nota-se que existem mais mulheres no dataset.")
+    st.markdown("Nota-se que não há uma grande discrepância entre os gêneros.")
 
   with row2_space2:
     st.markdown("""#### Agora, apos filtrar o dataset para casos positivos, como esses casos se comportam em relação à idade e sexo do paciente? """)
