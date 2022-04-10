@@ -1,1 +1,8 @@
 DataStackEnv/
+
+virtual-environment/
+
+__pycache__
+
+*.idea
+
