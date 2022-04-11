@@ -4,6 +4,7 @@ import pandas as pd
 from streamlit_option_menu import option_menu
 
 from app.dataExploration.data_exploration import data_exploration
+from app.preProcessing.pre_processing import pre_processing
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
 
@@ -24,6 +25,6 @@ with st.sidebar:
 
 options = optionsDict[selected]
 if options == 'preProcessing':
-  st.title('Pré-processamento dos dados')
+  pre_processing()
 if options == 'exploratoryAnalysis':
   data_exploration()
