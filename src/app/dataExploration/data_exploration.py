@@ -109,8 +109,11 @@ def data_exploration():
   heatMap = px.density_heatmap(ds, x="AgeCategory", y="Sex", category_orders={"AgeCategory": ageOrder})
 
   y = ds['AgeCategory'].value_counts()
-  pieChart = px.pie(y, values=y, names=y.index )
-  pieChart.update_traces(textposition='inside', textinfo='percent+label')
+  # pieChart = px.pie(y, values=y, names=y.index )
+  # pieChart.update_traces(textposition='inside', textinfo='percent+label')
+
+  ageOrder = ["80 or older", "75-79", "70-74", "65-69", "60-64", "55-59", "50-54", "45-49","40-44", "35-39", "30-34", "25-29", "18-24"]
+  pieChart = px.histogram(ds, x="AgeCategory", category_orders={"AgeCategory": ageOrder})
 
   st.title('Análise exploratória de dados')
 

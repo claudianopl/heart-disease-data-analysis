@@ -4,6 +4,7 @@ streamlit
 plotly
 numpy
 streamlit-option-menu
+imbalanced-learn
 # numpy==1.18.5
 pandas
 ## xmltodict
