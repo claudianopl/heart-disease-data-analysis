@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
+import pickle
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
@@ -71,6 +72,9 @@ ds_balancededArrayScaled_x = scaler_credit.fit_transform(ds_balancededArrayEncod
 
 ds_balancedArray_x_training, ds_balancedArray_x_test, ds_balancedAarray_y_training, ds_balancedAarray_y_test = train_test_split(ds_balancededArrayScaled_x, ds_balancedAarray_y, test_size = 0.25, random_state = 0)
 
+with open('heartDisease.pkl', mode = 'wb') as f:
+  pickle.dump([ds_balancedArray_x_training, ds_balancedAarray_y_training, ds_balancedArray_x_test, ds_balancedAarray_y_test], f)
+
 def pre_processing():
 
   st.title('Pré-processamento dos dados')
@@ -122,3 +126,5 @@ def pre_processing():
   st.write(ds_balancedArray_x_test.shape)
 
   st.markdown('## Agora os dados estão prontos para serem usados por algum algoritmo de machine learning')
+
+
