@@ -72,8 +72,7 @@ ds_balancededArrayScaled_x = scaler_credit.fit_transform(ds_balancededArrayEncod
 
 ds_balancedArray_x_training, ds_balancedArray_x_test, ds_balancedAarray_y_training, ds_balancedAarray_y_test = train_test_split(ds_balancededArrayScaled_x, ds_balancedAarray_y, test_size = 0.25, random_state = 0)
 
-with open('heartDisease.pkl', mode = 'wb') as f:
-  pickle.dump([ds_balancedArray_x_training, ds_balancedAarray_y_training, ds_balancedArray_x_test, ds_balancedAarray_y_test], f)
+
 
 def pre_processing():
 
