@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
@@ -96,21 +97,52 @@ def plot_x_per_team(attr, measure):
 
   st.pyplot(fig)
 
+def get_unique_ages_modified(df_data):
+  unique_ages = np.unique(df_data.AgeCategory).tolist()
+  ages_modified = []
+  for s,age in enumerate(unique_ages):
+    if s==0:
+        age = "‏‏‎ ‎‏‏‎ ‎" + age
+    if s==len(unique_ages)-1:
+        age = age + "‏‏‎ ‎‏‏‎ ‎"
+    ages_modified.append(age.replace("-","/"))
+
+  return(ages_modified)
+
+def filter_ages(df_data, start_ages, end_ages):
+  df_filtered_ages = pd.DataFrame()
+  ages = np.unique(df_data.AgeCategory).tolist() 
+  start_raw = start_ages.replace("/","-").replace("‏‏‎ ‎‏‏‎ ‎","") 
+  end_raw = end_ages.replace("/","-").replace("‏‏‎ ‎‏‏‎ ‎","") 
+  start_index = ages.index(start_raw)
+  end_index = ages.index(end_raw)+1
+  ages_selected = ages[start_index:end_index]
+  df_filtered_ages = df_data[df_data['AgeCategory'].isin(ages_selected)]
+  return df_filtered_ages
+
 def data_exploration():
-  dsOnlyHeartDiseaseYes = ds[ds['HeartDisease'] == 'Yes']
+  st.sidebar.markdown("**Selecione o intervalo de dados que você deseja analisar:** 👇")
+  unique_ages = get_unique_ages_modified(ds)
+  start_ages, end_ages = st.sidebar.select_slider('Selecione a faixa etária que deseja incluir', unique_ages, value = ["‏‏‎ ‎‏‏‎ ‎18/24","80 or older‏‏‎ ‎‏‏‎ ‎"])
+  df_data_filtered_ages = filter_ages(ds, start_ages, end_ages)
+
+  dsOnlyHeartDiseaseYes = df_data_filtered_ages[df_data_filtered_ages['HeartDisease'] == 'Yes']
 
   ageOrder = ["80 or older", "75-79", "70-74", "65-69", "60-64", "55-59", "50-54", "45-49","40-44", "35-39", "30-34", "25-29", "18-24"]
 
-  histogramSexCount = px.histogram(ds, x="Sex", color="Sex",  color_discrete_map = {'Male':'blue','Female':'red'}, category_orders={"AgeCategory": ageOrder})
+  histogramSexCount = px.histogram(df_data_filtered_ages, x="Sex", color="Sex",  color_discrete_map = {'Male':'blue','Female':'red'}, category_orders={"AgeCategory": ageOrder})
 
   histogramAgeCategory = px.histogram(dsOnlyHeartDiseaseYes, x="AgeCategory", color="Sex", barmode="group", color_discrete_map = {'Male':'blue','Female':'red'}, category_orders={"AgeCategory": ageOrder})
   df = px.data.tips()
 
-  heatMap = px.density_heatmap(ds, x="AgeCategory", y="Sex", category_orders={"AgeCategory": ageOrder})
+  heatMap = px.density_heatmap(df_data_filtered_ages, x="AgeCategory", y="Sex", category_orders={"AgeCategory": ageOrder})
 
-  y = ds['AgeCategory'].value_counts()
-  pieChart = px.pie(y, values=y, names=y.index )
-  pieChart.update_traces(textposition='inside', textinfo='percent+label')
+  y = df_data_filtered_ages['AgeCategory'].value_counts()
+  # pieChart = px.pie(y, values=y, names=y.index )
+  # pieChart.update_traces(textposition='inside', textinfo='percent+label')
+
+  ageOrder = ["80 or older", "75-79", "70-74", "65-69", "60-64", "55-59", "50-54", "45-49","40-44", "35-39", "30-34", "25-29", "18-24"]
+  pieChart = px.histogram(df_data_filtered_ages, x="AgeCategory", category_orders={"AgeCategory": ageOrder})
 
   st.title('Análise exploratória de dados')
 

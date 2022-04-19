@@ -4,19 +4,23 @@ import pandas as pd
 from streamlit_option_menu import option_menu
 
 from app.dataExploration.data_exploration import data_exploration
+from app.preProcessing.pre_processing import pre_processing
+from app.randomForest.randomForest import randomForest
+
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
 
 optionsDict = {
   'Analise exploratória': 'exploratoryAnalysis',
-  'Pré-processamento': 'preProcessing'
+  'Pré-processamento': 'preProcessing',
+  'Random-Forest': 'randomForest'
 }
 
 st.set_page_config(layout="wide")
 with st.sidebar:
   selected = option_menu(
     menu_title='Menu Principal',
-    options=['Pré-processamento', 'Analise exploratória'],
+    options=['Pré-processamento', 'Analise exploratória', 'Random-Forest'],
     icons=['gear-fill', 'bar-chart-fill'],
     menu_icon='cast',
     default_index=0,
@@ -24,6 +28,8 @@ with st.sidebar:
 
 options = optionsDict[selected]
 if options == 'preProcessing':
-  st.title('Pré-processamento dos dados')
+  pre_processing()
 if options == 'exploratoryAnalysis':
   data_exploration()
+if options == 'randomForest':
+  randomForest()
