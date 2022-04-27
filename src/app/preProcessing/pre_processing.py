@@ -72,6 +72,9 @@ ds_balancededArrayScaled_x = scaler_credit.fit_transform(ds_balancededArrayEncod
 
 ds_balancedArray_x_training, ds_balancedArray_x_test, ds_balancedAarray_y_training, ds_balancedAarray_y_test = train_test_split(ds_balancededArrayScaled_x, ds_balancedAarray_y, test_size = 0.25, random_state = 0)
 
+boxPlotBmi = px.box(ds_balanced, y="BMI")
+boxPlotPH = px.box(ds_balanced, y="PhysicalHealth")
+boxPlotMH = px.box(ds_balanced, y="MentalHealth")
 
 
 def pre_processing():
@@ -125,5 +128,12 @@ def pre_processing():
   st.write(ds_balancedArray_x_test.shape)
 
   st.markdown('## Agora os dados estão prontos para serem usados por algum algoritmo de machine learning')
+
+
+
+  st.plotly_chart(boxPlotBmi)
+  st.plotly_chart(boxPlotPH)
+  st.plotly_chart(boxPlotMH)
+
 
 
