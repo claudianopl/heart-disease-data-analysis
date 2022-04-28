@@ -24,7 +24,12 @@ providers_ds, classe_ds = rus.fit_resample(providers, classe)
 unbalancedHistogram = px.histogram(ds, x="HeartDisease")
 balancedHistogram = px.histogram(classe_ds, x="HeartDisease")
 
-ds_balanced = pd.concat([providers_ds, classe_ds], axis=1)
+def return_ds_balanced():
+  ds_balanced = pd.concat([providers_ds, classe_ds], axis=1)
+  return ds_balanced
+
+ds_balanced = return_ds_balanced()
+
 ds_balancedArray_x = ds_balanced.iloc[:, 0:17].values #0:17 = previsores o 18 é a classe que não está inclusa aqui
 ds_balancedAarray_y = ds_balanced.iloc[:, 17].values #classe
 
@@ -72,13 +77,8 @@ ds_balancededArrayScaled_x = scaler_credit.fit_transform(ds_balancededArrayEncod
 
 ds_balancedArray_x_training, ds_balancedArray_x_test, ds_balancedAarray_y_training, ds_balancedAarray_y_test = train_test_split(ds_balancededArrayScaled_x, ds_balancedAarray_y, test_size = 0.25, random_state = 0)
 
-boxPlotBmi = px.box(ds_balanced, y="BMI")
-boxPlotPH = px.box(ds_balanced, y="PhysicalHealth")
-boxPlotMH = px.box(ds_balanced, y="MentalHealth")
-
 
 def pre_processing():
-
   st.title('Pré-processamento dos dados')
   st.markdown('#### Abaixo serão executados alguns procedimentos necessários para a aplicação dos algorítmos de machine learning')
 
@@ -128,12 +128,6 @@ def pre_processing():
   st.write(ds_balancedArray_x_test.shape)
 
   st.markdown('## Agora os dados estão prontos para serem usados por algum algoritmo de machine learning')
-
-
-
-  st.plotly_chart(boxPlotBmi)
-  st.plotly_chart(boxPlotPH)
-  st.plotly_chart(boxPlotMH)
 
 
 
