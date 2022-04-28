@@ -5,8 +5,11 @@ plotly
 numpy
 streamlit-option-menu
 imbalanced-learn
+imblearn
+sklearn
 # numpy==1.18.5
 pandas
+yellowbrick
 ## xmltodict
 
 ## urllib3 is a powerful, user-friendly HTTP client for Python

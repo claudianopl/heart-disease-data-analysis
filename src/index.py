@@ -25,7 +25,7 @@ with st.sidebar:
     menu_icon='cast',
     default_index=0,
   )
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 options = optionsDict[selected]
 if options == 'preProcessing':
   pre_processing()
