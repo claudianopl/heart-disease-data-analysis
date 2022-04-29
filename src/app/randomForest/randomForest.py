@@ -5,9 +5,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.metrics import plot_confusion_matrix
 from yellowbrick.classifier import ConfusionMatrix
+from app.Functions.dataManagement import csvToPickle
+from app.preProcessing.pre_processing import return_ds_balanced
 
 
-
+dataset = return_ds_balanced()
+csvToPickle(dataset, 'heartDisease')
 preProcessedDataset = pd.read_pickle(r'data/heartDisease.pkl')
 
 with open('heartDisease.pkl', 'rb') as f:  

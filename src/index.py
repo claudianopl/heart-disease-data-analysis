@@ -11,6 +11,7 @@ from app.outlier.outlier import outlier
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
 
+
 optionsDict = {
   'Analise exploratória': 'exploratoryAnalysis',
   'Pré-processamento': 'preProcessing',
