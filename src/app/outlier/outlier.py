@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 
+from app.Functions.dataManagement import csvToPickleWithoutOutlier
 from app.preProcessing.pre_processing import return_ds_balanced
 
 ds_balanced = return_ds_balanced()
@@ -15,6 +16,8 @@ boxPlotST = px.box(ds_balanced, y="SleepTime")
 
 ds_balanced.to_csv('data/personal-key-indicators-of-heart-disease-dataset-balanced.csv')
 ds_balanced_csv = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset-balanced.csv')
+noOutlierDataset = pd.read_pickle(r'data/heartDiseaseWithoutOutlier.pkl')
+
 
 # Tratamento dos outlier
 ## Bmi
@@ -34,6 +37,7 @@ boxPlot_PH_outlier_treatment = px.box(ds_balanced_csv, y="PhysicalHealth")
 boxPlot_MH_outlier_treatment = px.box(ds_balanced_csv, y="MentalHealth")
 boxPlot_ST_outlier_treatment = px.box(ds_balanced_csv, y="SleepTime")
 
+csvToPickleWithoutOutlier(ds_balanced_csv, 'heartDiseaseWithoutOutlier')
 
 def outlier():
   st.markdown("#### Visão geral do dataset balanceado 50% heartDisease yes e no")
@@ -58,4 +62,6 @@ def outlier():
   with row2_space3:
     st.plotly_chart(boxPlot_MH_outlier_treatment)
   st.plotly_chart(boxPlot_ST_outlier_treatment)
+
+  st.write(noOutlierDataset)
   

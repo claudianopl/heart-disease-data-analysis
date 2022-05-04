@@ -15,6 +15,8 @@ from sklearn.compose import ColumnTransformer
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
 
+visualization = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv') ##
+
 providers = ds.drop(['HeartDisease'], axis=1)
 classe = ds['HeartDisease']
 
@@ -32,6 +34,9 @@ ds_balanced = pd.concat([providers_ds, classe_ds], axis=1)
 
 def getPreProcessingDataset():
   return ds_balanced
+
+
+
 
 ds_balancedArray_x = ds_balanced.iloc[:, 0:17].values #0:17 = previsores o 18 é a classe que não está inclusa aqui
 ds_balancedAarray_y = ds_balanced.iloc[:, 17].values #classe
@@ -131,6 +136,11 @@ def pre_processing():
   st.write(ds_balancedArray_x_test.shape)
 
   st.markdown('## Agora os dados estão prontos para serem usados por algum algoritmo de machine learning')
+
+
+  
+
+
 
 
 
