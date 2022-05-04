@@ -41,5 +41,5 @@ def csvToPickle(csv,name):
   ds_balancededArrayEncoded_x = oneHotEncoder.fit_transform(ds_balancedArray_x)
   ds_balancededArrayScaled_x = scaler_credit.fit_transform(ds_balancededArrayEncoded_x)
   ds_balancedArray_x_training, ds_balancedArray_x_test, ds_balancedAarray_y_training, ds_balancedAarray_y_test = train_test_split(ds_balancededArrayScaled_x, ds_balancedAarray_y, test_size = 0.25, random_state = 0)
-  with open('{}.pkl'.format(name), mode = 'wb') as f:
+  with open('data/{}.pkl'.format(name), mode = 'wb') as f:
     pickle.dump([ds_balancedArray_x_training, ds_balancedAarray_y_training, ds_balancedArray_x_test, ds_balancedAarray_y_test], f)
