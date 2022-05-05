@@ -1,12 +1,14 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import pickle as pkl
+import pandas as pd
 
 
-from app.Functions.dataManagement import csvToPickleWithoutOutlier
+from app.Functions.dataManagement import csvToPickle
 from app.preProcessing.pre_processing import return_ds_balanced
 
-ds_balanced = return_ds_balanced()
+ds_balanced = return_ds_balanced() 
 
 boxPlotBmi = px.box(ds_balanced, y="BMI")
 boxPlotPH = px.box(ds_balanced, y="PhysicalHealth")
@@ -14,8 +16,13 @@ boxPlotMH = px.box(ds_balanced, y="MentalHealth")
 boxPlotST = px.box(ds_balanced, y="SleepTime")
 
 
+
+
 ds_balanced.to_csv('data/personal-key-indicators-of-heart-disease-dataset-balanced.csv')
 ds_balanced_csv = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset-balanced.csv')
+ds_balanced_No_Outlier = pd.read_csv('data/heartDiseaseNoOutlier.csv')  
+ds_balanced = return_ds_balanced()
+
 
 # Tratamento dos outlier
 ## Bmi
@@ -29,15 +36,25 @@ ds_balanced_csv['MentalHealth'].where(ds_balanced['MentalHealth'] <= 7, 7, inpla
 ds_balanced_csv['SleepTime'].where(ds_balanced['SleepTime'] <= 11, 7, inplace=True)
 ds_balanced_csv['SleepTime'].where(ds_balanced['SleepTime'] >= 3, 3, inplace=True)
 
+#criando arquivo CSV com os dados sem outlier e utilizando a função csvToPickle para transformar os dados
+ds_balanced_csv.drop("Unnamed: 0",axis=1, inplace=True)
+ds_balanced_csv.to_csv('data/heartDiseaseNoOutlier.csv', index=False)
+ds_balanced_No_Outlier = pd.read_csv('data/heartDiseaseNoOutlier.csv')
+csvToPickle(ds_balanced_No_Outlier, 'ds_balanced_No_Outlier_PKL')
+
 # BoxPlot
 boxPlot_Bmi_outlier_treatment = px.box(ds_balanced_csv, y="BMI")
 boxPlot_PH_outlier_treatment = px.box(ds_balanced_csv, y="PhysicalHealth")
 boxPlot_MH_outlier_treatment = px.box(ds_balanced_csv, y="MentalHealth")
 boxPlot_ST_outlier_treatment = px.box(ds_balanced_csv, y="SleepTime")
 
-csvToPickleWithoutOutlier(ds_balanced_csv, 'heartDiseaseWithoutOutlier')
 
-def outlier():
+
+def outlier():    
+  st.markdown("#### dataset com outlier") 
+  st.write(ds_balanced.describe())
+  st.markdown("#### dataset sem outlier")
+  st.write(ds_balanced_No_Outlier.describe())
   st.markdown("#### Visão geral do dataset balanceado 50% heartDisease yes e no")
   st.write(ds_balanced.head(10))
 
@@ -60,3 +77,10 @@ def outlier():
   with row2_space3:
     st.plotly_chart(boxPlot_MH_outlier_treatment)
   st.plotly_chart(boxPlot_ST_outlier_treatment)
+
+
+
+
+
+  
+  
