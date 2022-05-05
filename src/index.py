@@ -8,6 +8,7 @@ from app.dataExploration.data_exploration import data_exploration
 from app.preProcessing.pre_processing import pre_processing
 from app.randomForest.randomForest import randomForest
 from app.outlier.outlier import outlier
+from app.randomForestWithoutOutlier.randomForestWithoutOutlier import randomForestWithoutOutlier
 
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
@@ -18,15 +19,16 @@ optionsDict = {
   'Analise exploratória': 'exploratoryAnalysis',
   'Pré-processamento': 'preProcessing',
   'Outlier': 'outlier',
-  'Random-Forest': 'randomForest'
+  'Random-Forest': 'randomForest',
+  'Random-Forest com outlier tratado': 'randomForestWithoutOutlier'
 }
 
 st.set_page_config(layout="wide")
 with st.sidebar:
   selected = option_menu(
     menu_title='Menu Principal',
-    options=['Página Inicial', 'Pré-processamento', 'Outlier', 'Analise exploratória', 'Random-Forest'],
-    icons=['house-door-fill', 'gear-fill', 'align-top', 'bar-chart-fill', 'bezier'],
+    options=['Página Inicial', 'Pré-processamento', 'Outlier', 'Analise exploratória', 'Random-Forest', 'Random-Forest com outlier tratado'],
+    icons=['house-door-fill', 'gear-fill', 'align-top', 'bar-chart-fill', 'bezier', 'bezier'],
     menu_icon='cast',
     default_index=0,
   )
@@ -42,3 +44,5 @@ if options == 'exploratoryAnalysis':
   data_exploration()
 if options == 'randomForest':
   randomForest()
+if options == 'randomForestWithoutOutlier':
+  randomForestWithoutOutlier()
