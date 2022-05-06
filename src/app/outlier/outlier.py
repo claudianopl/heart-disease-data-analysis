@@ -16,8 +16,6 @@ boxPlotMH = px.box(ds_balanced, y="MentalHealth")
 boxPlotST = px.box(ds_balanced, y="SleepTime")
 
 
-
-
 ds_balanced.to_csv('data/personal-key-indicators-of-heart-disease-dataset-balanced.csv')
 ds_balanced_csv = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset-balanced.csv')
 ds_balanced_No_Outlier = pd.read_csv('data/heartDiseaseNoOutlier.csv')  
@@ -77,10 +75,3 @@ def outlier():
   with row2_space3:
     st.plotly_chart(boxPlot_MH_outlier_treatment)
   st.plotly_chart(boxPlot_ST_outlier_treatment)
-
-
-
-
-
-  
-  

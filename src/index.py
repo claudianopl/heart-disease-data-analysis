@@ -9,6 +9,8 @@ from app.preProcessing.pre_processing import pre_processing
 from app.randomForest.randomForest import randomForest
 from app.outlier.outlier import outlier
 from app.randomForestWithoutOutlier.randomForestWithoutOutlier import randomForestWithoutOutlier
+from app.svm.svm import MLSVM
+from app.knn.knn import MLKNN
 
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
@@ -20,15 +22,17 @@ optionsDict = {
   'Pré-processamento': 'preProcessing',
   'Outlier': 'outlier',
   'Random-Forest': 'randomForest',
-  'Random-Forest com outlier tratado': 'randomForestWithoutOutlier'
+  'Random-Forest com outlier tratado': 'randomForestWithoutOutlier',
+  'SVM com outlier tratado': 'SvmWithoutOutlier',
+  'KNN com outlier tratado': 'KnnWithoutOutlier',
 }
 
 st.set_page_config(layout="wide")
 with st.sidebar:
   selected = option_menu(
     menu_title='Menu Principal',
-    options=['Página Inicial', 'Pré-processamento', 'Outlier', 'Analise exploratória', 'Random-Forest', 'Random-Forest com outlier tratado'],
-    icons=['house-door-fill', 'gear-fill', 'align-top', 'bar-chart-fill', 'bezier', 'bezier'],
+    options=['Página Inicial', 'Pré-processamento', 'Outlier', 'Analise exploratória', 'Random-Forest', 'Random-Forest com outlier tratado', 'SVM com outlier tratado', 'KNN com outlier tratado'],
+    icons=['house-door-fill', 'gear-fill', 'align-top', 'bar-chart-fill', 'bezier', 'bezier', 'bezier', 'bezier'],
     menu_icon='cast',
     default_index=0,
   )
@@ -46,3 +50,7 @@ if options == 'randomForest':
   randomForest()
 if options == 'randomForestWithoutOutlier':
   randomForestWithoutOutlier()
+if options == 'SvmWithoutOutlier':
+  MLSVM()
+if options == 'KnnWithoutOutlier':
+  MLKNN()

@@ -7,6 +7,7 @@ streamlit-option-menu
 imbalanced-learn
 imblearn
 sklearn
+joblib
 # numpy==1.18.5
 pandas
 yellowbrick
