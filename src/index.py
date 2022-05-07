@@ -11,6 +11,7 @@ from app.outlier.outlier import outlier
 from app.randomForestWithoutOutlier.randomForestWithoutOutlier import randomForestWithoutOutlier
 from app.svm.svm import MLSVM
 from app.knn.knn import MLKNN
+from app.featureImportance.featureImportance import featureImportance
 
 
 ds = pd.read_csv('data/personal-key-indicators-of-heart-disease-dataset.csv')
@@ -25,13 +26,14 @@ optionsDict = {
   'Random-Forest com outlier tratado': 'randomForestWithoutOutlier',
   'SVM com outlier tratado': 'SvmWithoutOutlier',
   'KNN com outlier tratado': 'KnnWithoutOutlier',
+  'Feature importance': 'Featureimportance'
 }
 
 st.set_page_config(layout="wide")
 with st.sidebar:
   selected = option_menu(
     menu_title='Menu Principal',
-    options=['Página Inicial', 'Pré-processamento', 'Outlier', 'Analise exploratória', 'Random-Forest', 'Random-Forest com outlier tratado', 'SVM com outlier tratado', 'KNN com outlier tratado'],
+    options=['Página Inicial', 'Pré-processamento', 'Outlier', 'Analise exploratória', 'Random-Forest', 'Random-Forest com outlier tratado', 'SVM com outlier tratado', 'KNN com outlier tratado', 'Feature importance'],
     icons=['house-door-fill', 'gear-fill', 'align-top', 'bar-chart-fill', 'bezier', 'bezier', 'bezier', 'bezier'],
     menu_icon='cast',
     default_index=0,
@@ -54,3 +56,5 @@ if options == 'SvmWithoutOutlier':
   MLSVM()
 if options == 'KnnWithoutOutlier':
   MLKNN()
+if options == 'Featureimportance':
+  featureImportance()  
