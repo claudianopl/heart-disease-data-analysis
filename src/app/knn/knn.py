@@ -1,9 +1,11 @@
 import streamlit as st
 import joblib
+import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import plot_confusion_matrix, classification_report
 import pickle
 from yellowbrick.classifier import ConfusionMatrix
+
 
 try:
   KNN_heartDisease = joblib.load("pipeline/jobs/knn.joblib")
@@ -41,3 +43,9 @@ def MLKNN():
     st.markdown("#### Matriz de confusão com outlier tratado:")
     plot_confusion_matrix(KNN_heartDisease, ds_heartDisease_x_test, ds_heartDisease_y_test)  
     st.pyplot()
+  
+  with row1_space2:
+    st.markdown("#### Classification report: apenas 25% dos dados totais")
+    classificationReport = classification_report(ds_heartDisease_y_test, previsoes,  output_dict=True)
+    classificationReportDataFrame = pd.DataFrame(classificationReport).transpose()
+    st.write(classificationReportDataFrame)

@@ -50,6 +50,12 @@ def randomForest():#essa função vai servir apenas para mostrar o resultado do 
     st.markdown("#### Matriz de confusão:")
     plot_confusion_matrix(random_forest_heartDisease, ds_heartDisease_x_test, ds_heartDisease_y_test)  
     st.pyplot()
+  with row1_space2:
+    st.markdown("#### Classification report: apenas 25% dos dados totais")
 
+    classificationReport = classification_report(ds_heartDisease_y_test, predictions,  output_dict=True)
+    classificationReportDataFrame = pd.DataFrame(classificationReport).transpose()
+    st.write(classificationReportDataFrame)
+    
 
 
